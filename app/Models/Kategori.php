@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+class Kategori extends Model
+{
+    protected $table = 'kategori';
+    protected $primaryKey = 'kategori_id';
+
+    protected $fillable = [
+        'kategori_name',
+    ];
+
+    // ─── Relasi ──────────────────────────────────────────────────────────────
+
+    /**
+     * Satu kategori memiliki banyak alat.
+     */
+    public function alat(): HasMany
+    {
+        return $this->hasMany(Alat::class, 'alat_kategori_id', 'kategori_id');
+    }
+}
